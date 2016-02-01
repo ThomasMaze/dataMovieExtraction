@@ -1,4 +1,4 @@
-import yearListGenerator as yearGen
+import yearListGenerator as gen
 import requests as req
 
 strPattern = '<a class="no_underline" href="/film/fichefilm_gen_cfilm='
@@ -6,9 +6,9 @@ reqPattern = 'http://www.allocine.fr/film/agenda/sem-'
 isMovieName = False
 movieList = []
 
-year2014 = yearGen.generator(2014)
+dateList = gen.generateList()
 
-for date in year2014 :
+for date in dateList :
 
     reqAns = req.get(reqPattern + date +'/')
     htmlCode = reqAns.content.splitlines()

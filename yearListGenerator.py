@@ -1,6 +1,7 @@
 import calendar
+import datetime as dt
 
-def generator(year) :
+def yearGenerator(year) :
 
     yearList = []
 
@@ -14,13 +15,25 @@ def generator(year) :
                 firstWeekDayDataStr = day[0].isoformat()
 
                 if firstDay :
-                    if firstWeekDayDataStr[0:4] == str(year) :
+                    if firstWeekDayDataStr[0:4] == str(year):
                         yearList = yearList + [firstWeekDayDataStr]
                         firstDay = False
                 else :
-                    if firstWeekDayDataStr != previousFirstWeekDayDataStr :
+                    if firstWeekDayDataStr != previousFirstWeekDayDataStr and firstWeekDayDataStr < dt.date.isoformat(dt.datetime.now()):
                         yearList = yearList + [firstWeekDayDataStr]
 
                 previousFirstWeekDayDataStr = firstWeekDayDataStr
 
     return yearList
+
+def generateList() :
+
+    todayISO = dt.datetime.isocalendar(dt.datetime.now())
+    yearList = range(2012, todayISO[0]+1)
+
+    wednesdayList = []
+
+    for year in yearList:
+        wednesdayList = wednesdayList + yearGenerator(year)
+
+    return wednesdayList
