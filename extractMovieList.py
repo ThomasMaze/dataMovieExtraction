@@ -1,24 +1,33 @@
 import yearListGenerator as gen
 import requests as req
 
-strPattern = '<a class="no_underline" href="/film/fichefilm_gen_cfilm='
-reqPattern = 'http://www.allocine.fr/film/agenda/sem-'
-isMovieName = False
-movieList = []
+def extractMovieList():
 
-dateList = gen.generateList()
+    strPattern = '<a class="no_underline" href="/film/fichefilm_gen_cfilm='
+    reqPattern = 'http://www.allocine.fr/film/agenda/sem-'
+    isMovieName = False
+    movieList = []
 
-for date in dateList :
+    dateList = gen.generateList()
 
-    reqAns = req.get(reqPattern + date +'/')
-    htmlCode = reqAns.content.splitlines()
+    for date in dateList :
 
-    for line in htmlCode :
-        if isMovieName :
-            movieList = movieList + [line]
-            isMovieName = False
+        reqAns = req.get(reqPattern + date +'/')
+        htmlCode = reqAns.content.splitlines()
 
-        if line[0:len(strPattern)] == strPattern:
-            isMovieName = True
+        for line in htmlCode :
+            if isMovieName :
+                movieList = movieList + [line]
+                isMovieName = False
 
-print len(movieList)
+            if line[0:len(strPattern)] == strPattern:
+                isMovieName = True
+
+    return movieList
+
+if __name__ == '__main__':
+
+    liste = extractMovieList()
+
+    for movieName in liste:
+        print movieName
