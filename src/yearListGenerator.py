@@ -19,7 +19,7 @@ def yearGenerator(year) :
                         yearList = yearList + [firstWeekDayDataStr]
                         firstDay = False
                 else :
-                    if firstWeekDayDataStr != previousFirstWeekDayDataStr and firstWeekDayDataStr < dt.date.isoformat(dt.datetime.now()):
+                    if firstWeekDayDataStr != previousFirstWeekDayDataStr and firstWeekDayDataStr <= dt.date.isoformat(dt.datetime.now()):
                         yearList = yearList + [firstWeekDayDataStr]
 
                 previousFirstWeekDayDataStr = firstWeekDayDataStr
