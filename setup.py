@@ -17,7 +17,7 @@ setup(
     packages = find_packages(exclude=['docs' , 'test*']),
     entry_points = {
         'console_scripts': [
-            'moviedb=src.extractMovieList:main',
+            'moviedb=src.main:main',
         ],
     },
 
