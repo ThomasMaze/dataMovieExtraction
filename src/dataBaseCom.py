@@ -30,11 +30,25 @@ def removeMovie(name,db):
     sql = "delete from movie where title='" + name + "';"
     executeQuery(sql,db)
 
+def getList(db):
+    sql = "select * from movie;"
+    listing = executeQuery(sql,db)
+    return listing
+
+
 
 def executeQuery(sql,db):
-    db.cursor().execute(sql)
+    c = db.cursor()
+    c.execute(sql)
     db.commit()
+    rows = c.fetchall()
+
+    if rows != () :
+        return rows
 
 if __name__ == '__main__':
     db = dbConnect()
-    removeMovie('kook', db)
+    movieList = getList(db)
+    for movie in movieList :
+        print movie
+    db.close()
