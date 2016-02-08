@@ -1,9 +1,19 @@
+"""
+This module create the dialog between the MySQL database 'testMovie' and our app.
+it contains all the fonction to add movie into the database, remove a movie from the
+database and get the movie list """
+
 import extractMovieList as ml
 import MySQLdb
 import getpass as gp
 from datetime import date
 
 def dbConnect():
+    """
+    Used to connect to the MySQL database 'testMovie' with
+    user: root
+    passwd: ********
+    It is assumed that de DB testMovie already exists. It returns the database"""
 
     user = raw_input('user: ')
     pwd = gp.getpass()
@@ -17,6 +27,11 @@ def dbConnect():
     return db
 
 def addMovie(name,releaseDate,db):
+    """
+    Add a movie to the database (see 'dbConnect()') given:
+    name -> str
+    releaseDate -> datetime.date
+    db -> _mysql.connection"""
 
     if not(isinstance(releaseDate,date)):
         print 'Bad argument - addMovie wait a datetime.date as 2nd argument'
@@ -26,18 +41,30 @@ def addMovie(name,releaseDate,db):
 
 
 def removeMovie(name,db):
+    """
+    Remove a movie from the database (see 'dbConnect()') given:
+    name -> str
+    db -> _mysql.connection"""
 
     sql = "delete from movie where title='" + name + "';"
     executeQuery(sql,db)
 
 def getList(db):
+    """
+    Get the movie list from the database (see 'dbConnect()') given:
+    db -> _mysql.connection"""
+
     sql = "select * from movie;"
     listing = executeQuery(sql,db)
     return listing
 
-
-
 def executeQuery(sql,db):
+    """
+    Execute a query to the database (see 'dbConnect()') given:
+    sql -> str request
+    db -> _mysql.connection
+    It returns the results if there is any"""
+
     c = db.cursor()
     c.execute(sql)
     db.commit()
