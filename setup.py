@@ -15,6 +15,7 @@ setup(
     author_email = 't.mazaleyrat@gmail.com',
     license = 'UNLICENSE',
     packages = find_packages(exclude=['docs' , 'test*']),
+    install_requires = ['requests' , 'progressbar' , ]
     entry_points = {
         'console_scripts': [
             'moviedb=src.main:main',
