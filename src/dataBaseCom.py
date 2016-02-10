@@ -36,7 +36,11 @@ def addMovie(name,releaseDate,db):
     if not(isinstance(releaseDate,date)):
         print 'Bad argument - addMovie wait a datetime.date as 2nd argument'
 
-    sql = "insert into movie values('%s','%s')" % (name, releaseDate.isoformat())
+    ind = name.find('"')
+    if ind != -1 :
+        name = name[0:ind]
+        
+    sql = 'insert into movie values("%s","%s")' % (name, releaseDate.isoformat())
     executeQuery(sql,db)
 
 
