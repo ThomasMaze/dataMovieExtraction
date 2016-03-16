@@ -2,7 +2,7 @@ import calendar
 import datetime as dt
 from sys import exit
 
-def dateGenerator(start_date):
+def dateGenerator(start_date=dt.date(2012,1,1)):
 
     stop_date = dt.date.today()
 

@@ -1,6 +1,6 @@
 #!/usr/bin/python
 
-import yearListGenerator as gen
+import dateListGenerator as gen
 import requests as req
 import progressbar as pb
 
@@ -11,7 +11,7 @@ def extractMovieList():
     isMovieName = False
     movieList = []
 
-    dateList = gen.generateList()
+    dateList = gen.dateGenerator()
 
     #intializing a progress bar
     bar = pb.ProgressBar(maxval=len(dateList),widgets=[pb.Bar('=','[',']'),'',pb.Percentage()])
